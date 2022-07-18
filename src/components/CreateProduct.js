@@ -7,11 +7,11 @@ const CreateProduct = () => {
     const [price, setPrice] = useState()
     const [published, setPublished] = useState()
 
-    const userEmail = useSelector(state => state.currentUser)
+    const user = useSelector(state => state.currentUser)
 
     const handleSubmit = (e) => {
         console.log(localStorage.token)
-        console.log(userEmail)
+        console.log(user)
         e.preventDefault()
         axios.post('http://localhost:3000/api/v1/products', JSON.stringify({
             "product": {
@@ -20,7 +20,7 @@ const CreateProduct = () => {
                 "published": published === "yes" ? true : false,
             }
         }), {
-            headers: {"content-type": "application/json", "Authorization": `Bearer ${localStorage.getItem("token")}`}
+            headers: {"content-type": "application/json", "Authorization": localStorage.getItem("token")}
         }).then(res => {
             console.log('Product CREATED? ', res)
         }).catch(error => console.error(error))

@@ -22,7 +22,7 @@ const Signup = () => {
             console.log(res)
             localStorage.setItem("token", res.data.token)
             dispatch({type: 'LOGIN_USER', payload: {
-                user: res.data.email
+                user: res.data.user
             }})
         })
     };
